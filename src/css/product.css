@@ -1,0 +1,22 @@
+.image-style{
+    height: 75%;
+    z-index: 2;
+}
+
+.product-container{
+    opacity: 0.9;
+    flex: 1 0 14%;
+    margin: 5px;
+    min-width: 280;
+    height: 350px;
+    display:flex;
+    flex-direction:column;
+    background-color: #f5fbfd;
+    position: relative;
+}
+    
+.product-container:hover{
+    opacity: 1;
+    background: #d8dee2;
+    cursor: pointer;
+}
