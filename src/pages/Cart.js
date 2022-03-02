@@ -183,7 +183,7 @@ const Cart = () => {
     });
 
     function checkoutNow(){
-        alert("clicked")
+        dispatch(cartActions.createOrder(user.id))
     }
 
   return (
@@ -192,9 +192,9 @@ const Cart = () => {
         <Navbar/>
             <Wrapper>
                 <Title>YOUR BAG</Title>
+                <Hr/>
                 <Top>
                     <TopButton href="/">CONTINUE SHOPPING</TopButton>
-                    <TopButton type="filled">CHECKOUT NOW</TopButton>
                 </Top>
                 <Bottom>
                     <Info>

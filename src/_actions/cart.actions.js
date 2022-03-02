@@ -4,7 +4,8 @@ import { cartConstants } from "../_constants"
 
 export const cartActions = {
     addToCart,
-    getCartItems
+    getCartItems,
+    createOrder
 }
 
 function addToCart(cartRequest){
@@ -24,6 +25,28 @@ function addToCart(cartRequest){
     function request(cartRequest) {return {type: cartConstants.ADDTOCART_REQUEST,cartRequest}}
     function success(cartRequest){return {type: cartConstants.ADDTOCART_SUCCESS,cartRequest}}
     function failure(cartRequest) {return {type: cartConstants.ADDTOCART_FAILURE,cartRequest}}
+}
+
+function createOrder(id){
+    
+    return dispatch => {
+        dispatch(request(id))
+
+        cartService.createOrder(id)
+            .then(response => {
+                console.log("Dispatch CREATE ORDER ",response.data)
+                dispatch(success(response.data))
+            },
+            error => {
+                dispatch(failure(error.toString()))
+                dispatch(alertActions.error(error.message))
+            }
+            )
+    }
+
+    function request(id) {return {type: cartConstants.CREATEORDER_REQUEST,id}}
+    function success(data){return {type: cartConstants.CREATEORDER_SUCCESS,data}}
+    function failure(id) {return {type: cartConstants.CREATEORDER_FAILURE,id}}
 }
 
 function getCartItems(id){
