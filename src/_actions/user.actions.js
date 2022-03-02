@@ -11,24 +11,20 @@ export const userActions = {
 
 function login(user, from){
     return dispatch => {
+
         dispatch(request({user}))
 
         userService.login(user)
         .then(
             response => {
-                console.log("Dispatch before is",response.responseMessage)
-                if(response.httpResponseCode === 200){
-                    dispatch(success(response.responseObject.user))
+                console.log("Dispatch before  response.status",response)
+                    dispatch(success(response.data))
                     history.push(from)
-                }else{
-                    console.log("Dispatch response.responseMessage is",response.responseMessage)
-                    dispatch(failure(response.responseMessage))
-                    dispatch(alertActions.error(response.responseMessage))
-                }
+               
                 window.location.reload()
             },
             error => {
-                
+                console.log("Error occurred!!",error)
                 dispatch(failure(error.toString()))
                 dispatch(alertActions.error(error.toString()))
             }
@@ -50,9 +46,12 @@ function register(user){
         dispatch(request(user))
 
         userService.register(user)
+        .then(response => {
+            return response.json()
+        })
         .then(
             user => {
-                dispatch(success());
+                dispatch(success(user));
                 history.push('/login')
                 dispatch(alertActions.success('Registration successful'))
             },

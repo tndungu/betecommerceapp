@@ -2,6 +2,7 @@ import { Add, Remove } from "@material-ui/icons";
 import styled from "styled-components"
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
+import Announcement  from '../components/Announcement'
 import { mobile } from "../responsive";
 
 //import img from '../image/0000015.jpg'
@@ -25,14 +26,22 @@ const Top = styled.div`
     padding: 20px;
 `;
 
-const TopButton = styled.button`
-    padding: 10px;
-    font-weight: 600;
+// const TopButton = styled.a`
+//     padding: 10px;
+//     font-weight: 600;
+//     cursor: pointer;
+//     border: ${props => props.type === "filled" && "none"};
+//     background-color: ${props => props.type === "filled" ? "black" : "transparent"};
+//     color: ${props => props.type === "filled" && "white"};
+// `;
+
+ const TopButton = styled.a`
+    margin: 5px 0px;
+    font-size: 16px;
+    text-decoration: underline;
     cursor: pointer;
-    border: ${props => props.type === "filled" && "none"};
-    background-color: ${props => props.type === "filled" ? "black" : "transparent"};
-    color: ${props => props.type === "filled" && "white"};
-`;
+`; 
+
 
 const TopTexts = styled.div`
 ${mobile({diplay:"none"})}
@@ -75,7 +84,12 @@ const Details = styled.div`
     justify-content:space-around;
 `;
 
-const ProductName = styled.span``;
+const ProductName = styled.span`
+    display:flex;
+    flex:wrap;
+    font-weight:500;
+    padding:5px;
+`;
 
 const ProductId = styled.span``;
 
@@ -155,15 +169,12 @@ const Button = styled.button`
 const Cart = () => {
   return (
     <Container>
+        <Announcement />
         <Navbar/>
             <Wrapper>
                 <Title>YOUR BAG</Title>
                 <Top>
-                    <TopButton>CONTINUE SHOPPING</TopButton>
-                    <TopTexts>
-                        <TopText>Shopping Bag(2)</TopText>
-                        <TopText>Your Wishlist</TopText>
-                    </TopTexts>
+                    <TopButton href="/">CONTINUE SHOPPING</TopButton>
                     <TopButton type="filled">CHECKOUT NOW</TopButton>
                 </Top>
                 <Bottom>
@@ -173,18 +184,11 @@ const Cart = () => {
                                 <Image src="https://www.nicekicks.com/files/2020/01/IMG_0781.jpg"/>
                                 <Details>
                                     <ProductName><b>Product:</b> JESSIE THUNDER </ProductName>
-                                    <ProductId><b>ID:</b>89528216514</ProductId>
-                                    <ProductColor color="black"/>
-                                    <ProductSize><b>Size:</b> 37.5</ProductSize>
+                                    <ProductName><b>Quantity:</b> 2 </ProductName>
+                                    <ProductName><b>Price:</b> R 300.00 </ProductName>
                                 </Details>
                             </ProductDetail>
                             <PriceDetail>
-                                <ProductAmountContainer>
-                                    <Add/>
-                                    <ProductAmount>2</ProductAmount>
-                                    <Remove/>
-                                </ProductAmountContainer>
-                                <ProductPrice>R 300.00</ProductPrice>
                             </PriceDetail>
                         </Product>
                         <Hr/>
@@ -192,19 +196,12 @@ const Cart = () => {
                             <ProductDetail>
                                 <Image src="https://www.nicekicks.com/files/2020/01/IMG_0781.jpg"/>
                                 <Details>
-                                    <ProductName><b>Product:</b> JESSIE THUNDER</ProductName>
-                                    <ProductId><b>ID:</b>89528216514</ProductId>
-                                    <ProductColor color="black"/>
-                                    <ProductSize><b>Size:</b> 37.5</ProductSize>
+                                    <ProductName><b>Product:</b> JESSIE THUNDER </ProductName>
+                                    <ProductName><b>Quantity:</b> 2 </ProductName>
+                                    <ProductName><b>Price:</b> R 300.00 </ProductName>
                                 </Details>
                             </ProductDetail>
                             <PriceDetail>
-                                <ProductAmountContainer>
-                                    <Add/>
-                                    <ProductAmount>2</ProductAmount>
-                                    <Remove/>
-                                </ProductAmountContainer>
-                                <ProductPrice>R 300.00</ProductPrice>
                             </PriceDetail>
                         </Product>
                     </Info>
@@ -215,12 +212,8 @@ const Cart = () => {
                             <SummaryItemPrice>R 320.00</SummaryItemPrice>
                         </SummaryItem>
                         <SummaryItem>
-                            <SummaryItemText>Estimated Shipping</SummaryItemText>
-                            <SummaryItemPrice>R 120.00</SummaryItemPrice>
-                        </SummaryItem>
-                        <SummaryItem>
-                            <SummaryItemText>Shipping discount</SummaryItemText>
-                            <SummaryItemPrice>R -20.00</SummaryItemPrice>
+                            <SummaryItemText>Shipping Costs</SummaryItemText>
+                            <SummaryItemPrice>R 0.00</SummaryItemPrice>
                         </SummaryItem>
                         <SummaryItem type="total">
                             <SummaryItemText>Total</SummaryItemText>
