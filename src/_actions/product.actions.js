@@ -4,8 +4,7 @@ import {productService } from '../_services'
 import {alertActions } from './'
 
 export const productActions = {
-    getAllProducts,
-    addToCart
+    getAllProducts
 }
 
 function getAllProducts(PointerParams){
@@ -30,21 +29,3 @@ function getAllProducts(PointerParams){
     function failure(error) { return {type: productConstants.GETALLPRODUCTS_FAILURE, error} }
 }
 
-function addToCart(cartRequest){
-    return dispatch => {
-        dispatch(request(cartRequest))
-
-        productService.addToCart(cartRequest)
-            .then(response => {
-                dispatch(success(response.data))
-            },
-            error => {
-                dispatch(failure(error.toString()))
-                dispatch(alertActions.error(error.message))
-            }
-            )
-    }
-    function request(cartRequest) {return {type: productConstants.ADDTOCART_REQUEST,cartRequest}}
-    function success(cartRequest){return {type: productConstants.ADDTOCART_SUCCESS,cartRequest}}
-    function failure(cartRequest) {return {type: productConstants.ADDTOCART_FAILURE,cartRequest}}
-}

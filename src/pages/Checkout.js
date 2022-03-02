@@ -28,6 +28,15 @@ const Top = styled.div`
     padding: 20px;
 `;
 
+// const TopButton = styled.a`
+//     padding: 10px;
+//     font-weight: 600;
+//     cursor: pointer;
+//     border: ${props => props.type === "filled" && "none"};
+//     background-color: ${props => props.type === "filled" ? "black" : "transparent"};
+//     color: ${props => props.type === "filled" && "white"};
+// `;
+
  const TopButton = styled.a`
     margin: 5px 0px;
     font-size: 16px;
@@ -157,7 +166,6 @@ const Button = styled.button`
     background-color: black;
     color: white;
     font-weight: 600;
-    cursor:pointer;
 `;
 
 const ProdSpan = styled.span`
@@ -165,7 +173,7 @@ const ProdSpan = styled.span`
 `;
 
 
-const Cart = () => {
+const Checkout = () => {
     const cartItems = useSelector(state => state.carts)
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem('user'))
@@ -182,47 +190,24 @@ const Cart = () => {
         sum += item.totalPrice
     });
 
-    function checkoutNow(){
-        alert("clicked")
-    }
-
   return (
     <Container>
         <Announcement />
         <Navbar/>
             <Wrapper>
-                <Title>YOUR BAG</Title>
+                <Title>YOUR ORDER</Title>
                 <Top>
                     <TopButton href="/">CONTINUE SHOPPING</TopButton>
-                    <TopButton type="filled">CHECKOUT NOW</TopButton>
                 </Top>
                 <Bottom>
-                    <Info>
-                      {
-                          cartItems.items && cartItems.items.map((item) => (
-                              <div>
-                                  
-                              <Product>
-                                  <ProductDetail key={item.id}>
-                                      <Image src={`/image/${item.imageId}` }/>
-                                      <Details>
-                                          <ProductName><b>Product:</b> <ProdSpan> {item.productName}</ProdSpan> </ProductName>
-                                          <ProductName><b>Quantity:</b><ProdSpan> {item.quantity}</ProdSpan> </ProductName>
-                                          <ProductName><b>Price:</b><ProdSpan> {(Math.round((item.totalPrice*100)/100)).toFixed(2)} </ProdSpan></ProductName>
-                                      </Details>
-                                  </ProductDetail>
-                                  <PriceDetail>
-                                  </PriceDetail>
-                              </Product>
-                              <Hr/>
-                              </div>
-                          ))
-                      }
-                       
-                    </Info>
+                
                     <Summary>
                         
                         <SummaryTitle>ORDER SUMMARY</SummaryTitle>
+                        <SummaryItem>
+                            <SummaryItemText>Order Number</SummaryItemText>
+                            <SummaryItemPrice>R {}</SummaryItemPrice>
+                        </SummaryItem>
                         <SummaryItem>
                             <SummaryItemText>Subtotal</SummaryItemText>
                             <SummaryItemPrice>R {Math.round((sum*100)/100).toFixed(2)}</SummaryItemPrice>
@@ -235,7 +220,7 @@ const Cart = () => {
                             <SummaryItemText>Total</SummaryItemText>
                             <SummaryItemPrice>R {Math.round((sum*100)/100).toFixed(2)}</SummaryItemPrice>
                         </SummaryItem>
-                        <Button onClick={checkoutNow}>CHECKOUT NOW</Button>
+                        <Button>CHECKOUT NOW</Button>
                     </Summary>
                 </Bottom>
             </Wrapper>
@@ -244,4 +229,4 @@ const Cart = () => {
   ) 
 }
 
-export default Cart
+export default Checkout

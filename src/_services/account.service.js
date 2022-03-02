@@ -11,11 +11,6 @@ export const accountService = {
     logout,
     refreshToken,
     register,
-    verifyEmail,
-    forgotPassword,
-    validateResetToken,
-    resetPassword,
-    getAll,
     getById,
     create,
     update,
@@ -55,26 +50,6 @@ function register(params){
     return fetchWrapper.post(`${baseUrl}/register`,params)
 }
 
-function verifyEmail(token){
-    return fetchWrapper.post(`${baseUrl}/verify-email`,{token })
-}
-
-function forgotPassword(email){
-    return fetchWrapper.post(`${baseUrl}/forgot-password`,{email})
-}
-
-function validateResetToken(token){
-    return fetchWrapper.post(`${baseUrl}/validate-reset-token`,{token})
-}
-
-function resetPassword({token, password, confirmPassword}){
-    return fetchWrapper.post(`${baseUrl}/reset-password`,{token, password, confirmPassword})
-}
-
-function getAll(){
-    return fetchWrapper.get(baseUrl)
-}
-
 function getById(id){
     return fetchWrapper.get(`${baseUrl}/${id}`)
 }
@@ -96,16 +71,6 @@ function update(id, params){
         })
 }
 
-// function _delete(id){
-//     return fetchWrapper.delete(`${baseUrl}/${id}`)
-//         .then(x => {
-//             //auto logout if the logged in user deleted their own record
-//             if(id === userSubject.value.id){
-//                 logout()
-//             }
-//             return x
-//         })
-// }
 
 //helper functions
 

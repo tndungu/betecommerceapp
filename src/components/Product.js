@@ -123,9 +123,6 @@ export const Product = (item) => {
           <Button onClick={AddToCart}>ADD TO CART</Button>
         </AddContainer>
       </ButtonFooter>
-
-        
-          
     </div>
   )
 }
