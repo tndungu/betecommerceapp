@@ -11,17 +11,27 @@ export const userActions = {
 
 function login(user, from){
     return dispatch => {
-
         dispatch(request({user}))
 
         userService.login(user)
+        .then(response => {
+            return response.json()
+        })
         .then(
-            response => {
-                console.log("Dispatch before  response.status",response)
-                    dispatch(success(response.data))
+            user => {
+                if(user.statusCode == 200){
+                    localStorage.setItem('user', JSON.stringify(user.data));
+                    dispatch(success(user.data))
+                    dispatch(alertActions.success("Login successful"))
                     history.push(from)
-               
-                window.location.reload()
+                }else{
+                    dispatch(failure(user.message))
+                dispatch(alertActions.error(user.message))
+                }
+                setTimeout(() =>{
+                    window.location.reload()
+                },4000)
+                
             },
             error => {
                 console.log("Error occurred!!",error)
@@ -51,10 +61,18 @@ function register(user){
         })
         .then(
             user => {
-                dispatch(success(user));
-                history.push('/login')
-                
-                dispatch(alertActions.success('Registration successful'))
+                if(user.statusCode == 200){
+                    console.log("user",user)
+                    dispatch(success(user));
+                    dispatch(alertActions.success('Registration successful'))
+                    history.push('/login')
+                }else{
+                    dispatch(failure(user.message))
+                dispatch(alertActions.error(user.message))
+                }
+                setTimeout(() => {
+                    window.location.reload()
+                }, 4000);
             },
             error => {
                 dispatch(failure(error.toString()))

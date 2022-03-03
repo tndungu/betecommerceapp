@@ -56,22 +56,24 @@ ${mobile({flex: 2,justifyContent:"center"})}
 
 const MenuItem = styled.div`
 font-size:14px;
-cursor:pointer;
 margin-left:25px;
 ${mobile({fontSize:"12px", marginLeft:"10px"})}
 `;
 
-
+const Link = styled.a`
+font-size:14px;
+margin-left:25px;
+${mobile({fontSize:"12px", marginLeft:"10px"})}
+`;
 const Navbar = () => {
 
     const [user,setUser] = useState({})
     const [email,setEmail] = useState('')
 
     useEffect(() =>{
-
-        setUser(localStorage.getItem('user'))
+        setUser(JSON.parse(localStorage.getItem('user')))
         if(user !== null)
-            setEmail(user.Email)
+            setEmail(user.email)
       
     },[])
 
@@ -87,8 +89,8 @@ const Navbar = () => {
         <Center><Logo> BET</Logo>
         </Center>
         <Right>
-            <MenuItem>Welcome: {email}</MenuItem>
-            <MenuItem>Sign Out</MenuItem>
+            <MenuItem>Welcome: <b>{email}</b></MenuItem>
+            <Link href="../login"><b>Sign Out</b></Link>
             <MenuItem>
                 <Badge badgeContent={4} color="primary">
                     <ShoppingCartOutlined/>

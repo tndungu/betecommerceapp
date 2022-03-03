@@ -18,8 +18,14 @@ function getAllProducts(PointerParams){
             })
             .then(
                 products => {
-                    console.log("PRODUCTS IN ACTION ", products.data.products)
-                    dispatch(success(products.data.products))
+                    console.log("PRODUCTS IN ACTION ", products)
+                    if(products.statusCode == 200){
+                        
+                        dispatch(success(products.data.products))
+                    }else{
+                        dispatch(failure(products.message))
+                    }
+                    
                 },
                 error => dispatch(failure(error.toString()))
             )

@@ -12,7 +12,6 @@ const Login = () => {
         password:''
     })
     const [submitted, setSubmitted] = useState(false)
-    // const {email, password } = inputs;
     //const loggingIn = useSelector(state => state.authentication.loggingIn)
     const dispatch = useDispatch()
     const location = useLocation()
@@ -24,21 +23,15 @@ const Login = () => {
         password: Yup.string().required('Password is required')
     })
 
-    // useEffect(() => {
-    //     dispatch(userActions.logout())
-    // },[]);
+    useEffect(() => {
+        localStorage.removeItem('user')
+    },[]);
 
-    // function handleChange(e){
-    //     const {name, value } = e.target;
-    //     setInputs(inputs => ({...inputs, [name]: value }))
-    // }
-
+ 
     const handleSubmit = e => {
-        //e.preventDefault()
 
         setSubmitted(true)
         if(e.email && e.password){
-            //get return url from location state or default to home page
             
             const {from } = location.state || {from: {pathname: "/"}}
             dispatch(userActions.login(e, from))

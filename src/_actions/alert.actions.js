@@ -11,7 +11,6 @@ function success(message){
 }
 
 function error(message){
-    console.log("alertActionError",message)
     return {type: alertConstants.ERROR, message}
 }
 

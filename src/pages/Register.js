@@ -1,20 +1,24 @@
-import {useEffect,useState} from 'react'
+import {useEffect, useState} from 'react'
 import {useDispatch, useSelector } from 'react-redux'
 import {Link } from 'react-router-dom'
 import {userActions } from '../_actions'
 import {Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
-import styled from "styled-components"
-import { mobile } from "../responsive"
 import '../css/bet.css'
 
 export const Register = () => {
+    const alert = useSelector(state => state.alert)
 
     const [user,setUser] = useState({
         email:'',
         password:'',
         confirmPassword:''
     })
+
+
+    useEffect(() => {
+        console.log("register alert",alert)
+    },[])
 
     const [submitted, setSubmitted] = useState(false)
     const registering = useSelector(state => state.registration.registering)
@@ -32,17 +36,7 @@ export const Register = () => {
         .oneOf([Yup.ref('password'),null], 'Passwords must match')
     })
 
-    useEffect(() => {
-        dispatch(userActions.logout())
-    },[]);
-
-    // const handleChange = e => {
-    //     const {name, value } = e.target
-    //     setUser(user => ({...user,[name]: value}))
-    // }
-
     const handleSubmit = e => {
-        //e.preventDefault()
         
         setSubmitted(true)
         if(e.email && e.password){

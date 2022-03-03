@@ -12,32 +12,48 @@ import Navbar from '../components/Navbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { alertActions } from '../_actions';
 import {BrowserRouter as Router} from 'react-router-dom'
-import { Alert } from 'bootstrap';
+import { Alert } from '../components/Alert';
 import Checkout from '../pages/Checkout';
+import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer,toast } from 'react-toastify';
+
 
 const App = () => {
   const alert = useSelector(state => state.alert);
     const dispatch = useDispatch();
 
     useEffect(() => {
-      history.listen((location, action) => {
-          // clear alert on location change
-          dispatch(alertActions.clear());
-      });
+   
   }, []);
 
   return (
-    
-  <Router history={history}>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
-        <Route path="cart" element={<Cart />} />
-        <Route path="product" element={<Product />} />
-        <Route path="checkout" element={<Checkout/>}/>
-      </Routes>
-  </Router>
+    <div>
+{
+  alert.message && 
+  toast.success(alert.message,{
+    position: "top-right",
+    autoClose: 4000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    })
+
+}
+ <ToastContainer />
+
+      <Router history={history}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="cart" element={<Cart />} />
+          <Route path="product" element={<Product />} />
+          <Route path="checkout" element={<Checkout />} />
+        </Routes>
+      </Router>
+    </div>
   )
 }
 

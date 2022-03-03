@@ -15,16 +15,8 @@ function login(user){
     }
 
     return fetch(`${config.apiUrl}/user/authenticate`,requestOptions)
-        .then(response => {
-            return response.json()
-        })
         .then(handleResponse)
-        .then(user => {
-            console.log("localstorage user",user.data)
-            //store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('user', JSON.stringify(user.data));
-            return user.data;
-        })
+        
 }
 
 function logout(){
