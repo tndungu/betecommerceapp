@@ -59,7 +59,7 @@ const Product = styled.div`
     display: flex;
     justify-content: space-between;
     height:30vh;
-    
+    visibility: ${props => props.show == 0 ? "visible" : "hidden"};
 `;
 
 const ProductDetail = styled.div`
@@ -83,6 +83,7 @@ const ProductName = styled.span`
     flex:wrap;
     font-weight:500;
     padding:5px;
+    
 `;
 
 const ProductId = styled.span``;
@@ -157,7 +158,7 @@ const Button = styled.button`
     background-color: black;
     color: white;
     font-weight: 600;
-    cursor:pointer;
+    cursor:${props => props.disable == 0 ? "not-allowed": "pointer"};
 `;
 
 const ProdSpan = styled.span`
@@ -198,6 +199,9 @@ const Cart = () => {
                 </Top>
                 <Bottom>
                     <Info>
+                        <Product show={sum}>
+                        <ProductName><b>No items in your bag</b>  </ProductName>
+                        </Product>
                       {
                           cartItems.items && cartItems.items.map((item) => (
                               <div>
@@ -235,7 +239,7 @@ const Cart = () => {
                             <SummaryItemText>Total</SummaryItemText>
                             <SummaryItemPrice>R {Math.round((sum*100)/100).toFixed(2)}</SummaryItemPrice>
                         </SummaryItem>
-                        <Button onClick={checkoutNow}>CHECKOUT NOW</Button>
+                        <Button disable={sum} onClick={checkoutNow}>CHECKOUT NOW</Button>
                     </Summary>
                 </Bottom>
             </Wrapper>

@@ -35,4 +35,19 @@ export function addCart(state={},action){
     }
 }
 
+export function order(state={},action){
+    switch(action.type){
+        case cartConstants.ADDTOCART_REQUEST:
+            return {
+                loading:true
+            };
+        case cartConstants.ADDTOCART_SUCCESS:
+            return {};
+        case cartConstants.ADDTOCART_FAILURE:
+            return {};
+        default:
+            return state
+    }
+}
+
 

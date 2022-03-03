@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { alertActions } from '../_actions';
 import {BrowserRouter as Router} from 'react-router-dom'
 import { Alert } from 'bootstrap';
+import Checkout from '../pages/Checkout';
 
 const App = () => {
   const alert = useSelector(state => state.alert);
@@ -34,8 +35,9 @@ const App = () => {
         <Route path="register" element={<Register />} />
         <Route path="cart" element={<Cart />} />
         <Route path="product" element={<Product />} />
+        <Route path="checkout" element={<Checkout/>}/>
       </Routes>
-      </Router>
+  </Router>
   )
 }
 

@@ -4,7 +4,8 @@ import { authHeader,handleResponse } from '../_helpers'
 
 export const cartService = {
     addToCart,
-    getCartItems
+    getCartItems,
+    createOrder
 }
 
 function addToCart(CartRequest){
@@ -22,4 +23,12 @@ function getCartItems(id){
         headers: authHeader()
     }
     return fetch(`${config.apiUrl}/Cart/GetCartItems?userId=${id}`,requestOptions).then(handleResponse)
+}
+
+function createOrder(userId){
+    const requestOptions = {
+        method:'GET',
+        headers: authHeader(),
+    }
+    return fetch(`${config.apiUrl}/Order/Order?userId=${userId}`,requestOptions).then(handleResponse)
 }

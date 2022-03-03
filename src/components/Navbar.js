@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect,useState } from 'react'
 import styled from 'styled-components'
 import {Search, ShoppingCartOutlined } from '@material-ui/icons'
 import { Badge, Menu } from '@material-ui/core';
@@ -63,6 +63,18 @@ ${mobile({fontSize:"12px", marginLeft:"10px"})}
 
 
 const Navbar = () => {
+
+    const [user,setUser] = useState({})
+    const [email,setEmail] = useState('')
+
+    useEffect(() =>{
+
+        setUser(localStorage.getItem('user'))
+        if(user !== null)
+            setEmail(user.Email)
+      
+    },[])
+
   return (
     <Container>
         <Wrapper>
@@ -75,8 +87,8 @@ const Navbar = () => {
         <Center><Logo> BET</Logo>
         </Center>
         <Right>
-            <MenuItem>REGISTER</MenuItem>
-            <MenuItem>SIGN IN</MenuItem>
+            <MenuItem>Welcome: {email}</MenuItem>
+            <MenuItem>Sign Out</MenuItem>
             <MenuItem>
                 <Badge badgeContent={4} color="primary">
                     <ShoppingCartOutlined/>

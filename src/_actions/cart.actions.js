@@ -1,6 +1,7 @@
 import { alertActions } from "."
 import {cartService } from '../_services'
 import { cartConstants } from "../_constants"
+import {history } from '../_helpers'
 
 export const cartActions = {
     addToCart,
@@ -36,6 +37,8 @@ function createOrder(id){
             .then(response => {
                 console.log("Dispatch CREATE ORDER ",response.data)
                 dispatch(success(response.data))
+                history.push('./checkout')
+
             },
             error => {
                 dispatch(failure(error.toString()))
