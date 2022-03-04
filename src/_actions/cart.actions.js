@@ -14,8 +14,15 @@ function addToCart(cartRequest){
         dispatch(request(cartRequest))
 
         cartService.addToCart(cartRequest)
+            .then(data => {return data.json()})
             .then(response => {
-                dispatch(success(response.data))
+                console.log("AddToCart response",response)
+                if(response.statusCode == 200){
+                    dispatch(success(response.data))
+                    dispatch(alertActions.success("Item successfully added to cart"))
+                }else{
+                    dispatch(alertActions.failure("Item could not be added to cart"))
+                }
             },
             error => {
                 dispatch(failure(error.toString()))
@@ -28,12 +35,12 @@ function addToCart(cartRequest){
     function failure(cartRequest) {return {type: cartConstants.ADDTOCART_FAILURE,cartRequest}}
 }
 
-function createOrder(id){
+function createOrder(){
     
     return dispatch => {
-        dispatch(request(id))
+        dispatch(request())
 
-        cartService.createOrder(id)
+        cartService.createOrder()
             .then(response => {
                 console.log("Dispatch CREATE ORDER ",response.data)
                 dispatch(success(response.data))
@@ -47,17 +54,17 @@ function createOrder(id){
             )
     }
 
-    function request(id) {return {type: cartConstants.CREATEORDER_REQUEST,id}}
+    function request() {return {type: cartConstants.CREATEORDER_REQUEST}}
     function success(data){return {type: cartConstants.CREATEORDER_SUCCESS,data}}
-    function failure(id) {return {type: cartConstants.CREATEORDER_FAILURE,id}}
+    function failure() {return {type: cartConstants.CREATEORDER_FAILURE}}
 }
 
-function getCartItems(id){
+function getCartItems(){
     
     return dispatch => {
-        dispatch(request(id))
+        dispatch(request())
 
-        cartService.getCartItems(id)
+        cartService.getCartItems()
             .then(data => {
                 return data.json()
             })
@@ -72,7 +79,7 @@ function getCartItems(id){
             )
     }
 
-    function request(id) {return {type: cartConstants.GETCARTITEMS_REQUEST,id}}
+    function request() {return {type: cartConstants.GETCARTITEMS_REQUEST}}
     function success(data){return {type: cartConstants.GETCARTITEMS_SUCCESS,data}}
-    function failure(id) {return {type: cartConstants.GETCARTITEMS_FAILURE,id}}
+    function failure() {return {type: cartConstants.GETCARTITEMS_FAILURE}}
 }

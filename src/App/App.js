@@ -12,7 +12,6 @@ import Navbar from '../components/Navbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { alertActions } from '../_actions';
 import {BrowserRouter as Router} from 'react-router-dom'
-import { Alert } from '../components/Alert';
 import Checkout from '../pages/Checkout';
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer,toast } from 'react-toastify';
@@ -23,7 +22,7 @@ const App = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-   
+   console.log("APP LOADING")
   }, []);
 
   return (

@@ -30,7 +30,7 @@ function login(user, from){
                 }
                 setTimeout(() =>{
                     window.location.reload()
-                },4000)
+                },500)
                 
             },
             error => {

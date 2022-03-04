@@ -8,9 +8,10 @@ export const productService = {
 function getAllProducts(PointerParams){
     const requestOptions = {
         method:'POST',
-        headers:{'Content-Type':'application/json',...authHeader()}, // authHeader(),{'Content-Type':'application/json'}
+        headers:{'Content-Type':'application/json',...authHeader()}, 
         body: JSON.stringify(PointerParams)
     }
+    console.log("PRODUCTS TOKEN",requestOptions)
     return fetch(`${config.apiUrl}/Product/GetProducts`,requestOptions).then(handleResponse)
 }
 

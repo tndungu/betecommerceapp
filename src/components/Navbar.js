@@ -1,8 +1,11 @@
 import React, { useEffect,useState } from 'react'
 import styled from 'styled-components'
 import {Search, ShoppingCartOutlined } from '@material-ui/icons'
-import { Badge, Menu } from '@material-ui/core';
+import { Badge, IconButton, Menu } from '@material-ui/core';
 import {mobile } from "../responsive";
+import { useDispatch, useSelector } from 'react-redux';
+import { cartActions } from '../_actions/cart.actions';
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
     height:50px;
@@ -67,16 +70,15 @@ ${mobile({fontSize:"12px", marginLeft:"10px"})}
 `;
 const Navbar = () => {
 
-    const [user,setUser] = useState({})
-    const [email,setEmail] = useState('')
-
-    useEffect(() =>{
-        setUser(JSON.parse(localStorage.getItem('user')))
-        if(user !== null)
-            setEmail(user.email)
+    const email = useSelector(state => state.authentication.user.email)
+    const dispatch = useDispatch()
+    const cartItemsCount = useSelector(state => state.addCart.cartItems)
+    var navigate = useNavigate()
+    // useEffect(() =>{
+    //     dispatch(cartActions.getCartItemsCount(userid))
       
-    },[])
-
+    // },[])
+    
   return (
     <Container>
         <Wrapper>
@@ -88,15 +90,17 @@ const Navbar = () => {
         </Left>
         <Center><Logo> BET</Logo>
         </Center>
-        <Right>
-            <MenuItem>Welcome: <b>{email}</b></MenuItem>
-            <Link href="../login"><b>Sign Out</b></Link>
-            <MenuItem>
-                <Badge badgeContent={4} color="primary">
-                    <ShoppingCartOutlined/>
-                </Badge>
-            </MenuItem>
-        </Right>
+              <Right>
+                  <MenuItem>Welcome: <b>{email}</b></MenuItem>
+                  <Link href="../login"><b>Sign Out</b></Link>
+                  <MenuItem>
+                      <IconButton onClick={() => {navigate('/cart')}}>
+                          <Badge badgeContent={cartItemsCount} color="primary">
+                              <ShoppingCartOutlined />
+                          </Badge>
+                      </IconButton>
+                  </MenuItem>
+              </Right>
         </Wrapper>
     </Container>
   )

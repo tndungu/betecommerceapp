@@ -1,7 +1,6 @@
 import { cartConstants } from "../_constants/cart.constants";
 
 export function carts(state={},action){
-    console.log("action carts",action)
     switch(action.type){
         case cartConstants.GETCARTITEMS_REQUEST:
             return {
@@ -20,14 +19,16 @@ export function carts(state={},action){
     }
 }
 
-export function addCart(state={},action){
+export function addCart(state={cartItems:0},action){
     switch(action.type){
         case cartConstants.ADDTOCART_REQUEST:
             return {
                 loading:true
             };
         case cartConstants.ADDTOCART_SUCCESS:
-            return {};
+            return {
+                cartItems:action.cartRequest
+            };
         case cartConstants.ADDTOCART_FAILURE:
             return {};
         default:

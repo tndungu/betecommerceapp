@@ -19,7 +19,7 @@ const Products = (item) => {
 
   const [PointerParams,SetPointerParams] = useState({
     Pointer: 1,
-    Count: 20
+    Count: 50
   })
   const [hasMore,SethasMore] = useState(true)
 

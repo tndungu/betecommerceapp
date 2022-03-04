@@ -11,24 +11,25 @@ export const cartService = {
 function addToCart(CartRequest){
     const requestOptions = {
         method:'POST',
-        headers: authHeader(),
+        headers:{'Content-Type':'application/json',...authHeader()}, 
         body: JSON.stringify(CartRequest)
     }
-    return fetch(`${config.apiUrl}/Cart`,requestOptions).then(handleResponse)
+    return fetch(`${config.apiUrl}/Cart/AddToCart`,requestOptions).then(handleResponse)
 }
 
-function getCartItems(id){
+function getCartItems(){
     const requestOptions = {
         method:'GET',
-        headers: authHeader()
+        headers: {'Content-Type':'application/json',...authHeader()}, 
     }
-    return fetch(`${config.apiUrl}/Cart/GetCartItems?userId=${id}`,requestOptions).then(handleResponse)
+    console.log("cart Headers",requestOptions)
+    return fetch(`${config.apiUrl}/Cart/GetCartItems`,requestOptions).then(handleResponse)
 }
 
-function createOrder(userId){
+function createOrder(){
     const requestOptions = {
         method:'GET',
-        headers: authHeader(),
+        headers: {'Content-Type':'application/json',...authHeader()}, 
     }
-    return fetch(`${config.apiUrl}/Order/Order?userId=${userId}`,requestOptions).then(handleResponse)
+    return fetch(`${config.apiUrl}/Order/Order`,requestOptions).then(handleResponse)
 }

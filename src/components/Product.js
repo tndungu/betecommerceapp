@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { userActions,productActions } from "../_actions";
-import { FavoriteBorderOutlined, SearchOutlined, ShoppingCartOutlined } from "@material-ui/icons"
+import { useEffect, useRef } from "react";
+import { useDispatch,useSelector } from "react-redux";
+import { userActions } from "../_actions";
 import { Add, Remove } from "@material-ui/icons";
 import styled from "styled-components"
-import { popularProducts } from "../data"
 import { mobile } from "../responsive"
 import "../css/product.css"
+import { cartActions } from "../_actions/cart.actions";
+import useState from 'react-usestateref'
 
 const ProductName = styled.span`
     padding:5px;
@@ -71,38 +71,26 @@ const Button = styled.button`
 `;
 
 export const Product = (item) => {
+
   const prod = item.item
-  const [quantity,setQuantity] = useState(1)
-  const [cartRequest,setCartRequest] = useState({
-    ProductId: prod.id,
-    quantity: quantity,
-    UserId: 0
-  })
-
+  const [quantity,setQuantity,quantityRef] = useState(1)
+  const loggedIn = useSelector(state => state.authentication.loggedIn)
   const dispatch = useDispatch()
-  const DecrementQuantity = () =>{
-    if(quantity > 1)
-      setQuantity(quantity - 1)
-  }
-
-  const IncrementQuantity = () =>{
-    setQuantity(quantity + 1)
+  
+  const SetQuantity = (val) =>{
+    if(val == 'increment')
+      setQuantity(quantity + 1)
+    else
+    setQuantity(quantity - 1)
   }
 
   const AddToCart = () => {
-    let user = JSON.parse(localStorage.getItem('user'))
-    console.log("logged in user is",user)
-    if (user === null){
-      dispatch(userActions.logout())
+    if (loggedIn){
+      dispatch(cartActions.addToCart({ProductId:prod.id,quantity:quantityRef.current}))
+      setQuantity(1)
     }
     else {
-      setCartRequest({
-        ProductId: prod.id,
-        quantity: quantity,
-        UserId: user.id
-      })
-      console.log("cartRequest is",cartRequest)
-      dispatch(productActions.addToCart(cartRequest))
+      dispatch(userActions.logout())
     }
   }
 
@@ -116,9 +104,9 @@ export const Product = (item) => {
         </AmountWrap>
         <AddContainer>
           <AmountContainer>
-            <Remove onClick={DecrementQuantity} />
+            <Remove onClick={() => SetQuantity('decrement')} />
             <Amount>{quantity}</Amount>
-            <Add onClick={IncrementQuantity} />
+            <Add onClick={() => SetQuantity('increment')} />
           </AmountContainer>
           <Button onClick={AddToCart}>ADD TO CART</Button>
         </AddContainer>

@@ -6,6 +6,7 @@ import { mobile } from "../responsive";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../_actions/cart.actions";
+import { userActions } from "../_actions/user.actions";
 
 //import img from '../image/0000015.jpg'
 
@@ -59,7 +60,7 @@ const Product = styled.div`
     display: flex;
     justify-content: space-between;
     height:30vh;
-    visibility: ${props => props.show == 0 ? "visible" : "hidden"};
+    visibility: ${props => props.show == true && "hidden"};
 `;
 
 const ProductDetail = styled.div`
@@ -165,16 +166,18 @@ const ProdSpan = styled.span`
     padding-left:5px;
 `;
 
-
 const Cart = () => {
     const cartItems = useSelector(state => state.carts)
+    const loggedIn = useSelector(state => state.authentication.loggedIn)
     const dispatch = useDispatch();
-    const user = JSON.parse(localStorage.getItem('user'))
     const [cartResponse,setCartResponse] = useState({})
 
     useEffect(() => {
-        if(user !== null){
-            dispatch(cartActions.getCartItems(user.id))
+        console.log("cart actions")
+        if(loggedIn){
+            dispatch(cartActions.getCartItems())
+        }else{
+            dispatch(userActions.logout())
         }
     },[])
 
@@ -184,7 +187,7 @@ const Cart = () => {
     });
 
     function checkoutNow(){
-        dispatch(cartActions.createOrder(user.id))
+        dispatch(cartActions.createOrder())
     }
 
   return (
@@ -199,9 +202,7 @@ const Cart = () => {
                 </Top>
                 <Bottom>
                     <Info>
-                        <Product show={sum}>
-                        <ProductName><b>No items in your bag</b>  </ProductName>
-                        </Product>
+                      
                       {
                           cartItems.items && cartItems.items.map((item) => (
                               <div>
@@ -212,7 +213,7 @@ const Cart = () => {
                                       <Details>
                                           <ProductName><b>Product:</b> <ProdSpan> {item.productName}</ProdSpan> </ProductName>
                                           <ProductName><b>Quantity:</b><ProdSpan> {item.quantity}</ProdSpan> </ProductName>
-                                          <ProductName><b>Price:</b><ProdSpan> {(Math.round((item.totalPrice*100)/100)).toFixed(2)} </ProdSpan></ProductName>
+                                          <ProductName><b>Total Price:</b><ProdSpan> {(Math.round((item.totalPrice*100)/100)).toFixed(2)} </ProdSpan></ProductName>
                                       </Details>
                                   </ProductDetail>
                                   <PriceDetail>
@@ -239,7 +240,7 @@ const Cart = () => {
                             <SummaryItemText>Total</SummaryItemText>
                             <SummaryItemPrice>R {Math.round((sum*100)/100).toFixed(2)}</SummaryItemPrice>
                         </SummaryItem>
-                        <Button disable={sum} onClick={checkoutNow}>CHECKOUT NOW</Button>
+                        <Button disable={sum} isDisabled={true} onClick={checkoutNow}>CHECKOUT NOW</Button>
                     </Summary>
                 </Bottom>
             </Wrapper>
