@@ -30,7 +30,7 @@ function login(user, from){
                 }
                 setTimeout(() =>{
                     window.location.reload()
-                },500)
+                },2000)
                 
             },
             error => {
@@ -62,7 +62,6 @@ function register(user){
         .then(
             user => {
                 if(user.statusCode == 200){
-                    console.log("user",user)
                     dispatch(success(user));
                     dispatch(alertActions.success('Registration successful'))
                     history.push('/login')

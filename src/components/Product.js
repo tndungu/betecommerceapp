@@ -80,8 +80,11 @@ export const Product = (item) => {
   const SetQuantity = (val) =>{
     if(val == 'increment')
       setQuantity(quantity + 1)
-    else
-    setQuantity(quantity - 1)
+    else{
+      if(quantity>1){
+        setQuantity(quantity - 1)
+      }
+    }
   }
 
   const AddToCart = () => {

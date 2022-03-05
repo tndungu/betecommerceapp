@@ -13,7 +13,6 @@ const Home = () => {
   const loggedIn = useSelector(state => state.authentication.loggedIn)
   
    useEffect(() => {
-
         if(!loggedIn)
           dispatch(userActions.logout())
     },[]);

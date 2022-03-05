@@ -3,18 +3,16 @@ import {Routes, Route} from 'react-router-dom'
 import '../App.css';
 import Home from '../pages/Home';
 import { history } from '../_helpers';
-import ProductList from '../pages/ProductList';
 import Product from '../pages/Product';
 import { Register } from '../pages/Register';
 import Login from '../pages/Login';
 import Cart from '../pages/Cart';
-import Navbar from '../components/Navbar';
 import { useDispatch, useSelector } from 'react-redux';
-import { alertActions } from '../_actions';
 import {BrowserRouter as Router} from 'react-router-dom'
 import Checkout from '../pages/Checkout';
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer,toast } from 'react-toastify';
+import {alertProps} from './alertProps'
 
 
 const App = () => {
@@ -22,23 +20,20 @@ const App = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-   console.log("APP LOADING")
   }, []);
+
+  const toastMessage = (type) => {
+    if(type == 'success'){
+      return toast.success(alert.message,alertProps)
+    }else{
+      return toast.error(alert.message,alertProps)
+    }
+  }
 
   return (
     <div>
 {
-  alert.message && 
-  toast.success(alert.message,{
-    position: "top-right",
-    autoClose: 4000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    })
-
+  alert.message && toastMessage(alert.type)
 }
  <ToastContainer />
 

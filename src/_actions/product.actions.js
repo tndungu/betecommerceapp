@@ -1,7 +1,5 @@
-import Cart from "../pages/Cart"
 import { productConstants } from "../_constants"
 import {productService } from '../_services'
-import {alertActions } from './'
 
 export const productActions = {
     getAllProducts
@@ -10,7 +8,6 @@ export const productActions = {
 function getAllProducts(PointerParams){
     return dispatch => {
         dispatch(request(PointerParams))
-        console.log("PointerParams", PointerParams)
 
         productService.getAllProducts(PointerParams)
             .then(data => {
@@ -18,9 +15,7 @@ function getAllProducts(PointerParams){
             })
             .then(
                 products => {
-                    console.log("PRODUCTS IN ACTION ", products)
                     if(products.statusCode == 200){
-                        
                         dispatch(success(products.data.products))
                     }else{
                         dispatch(failure(products.message))

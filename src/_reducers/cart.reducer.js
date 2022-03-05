@@ -19,18 +19,36 @@ export function carts(state={},action){
     }
 }
 
-export function addCart(state={cartItems:0},action){
+export function addCart(state={},action){
     switch(action.type){
         case cartConstants.ADDTOCART_REQUEST:
             return {
                 loading:true
             };
         case cartConstants.ADDTOCART_SUCCESS:
-            return {
-                cartItems:action.cartRequest
-            };
+            return {};
         case cartConstants.ADDTOCART_FAILURE:
             return {};
+        default:
+            return state
+    }
+}
+
+export function cartitemscount(state={cartItems:0},action){
+    console.log("cartItemsCount",action)
+    switch(action.type){
+        case cartConstants.GETCARTITEMSCOUNT_REQUEST:
+            return {
+                loading:true
+            };
+        case cartConstants.GETCARTITEMSCOUNT_SUCCESS:
+            return {
+                cartItems: action.data
+            };
+        case cartConstants.GETCARTITEMSCOUNT_FAILURE:
+            return {
+                error: action.error
+            };
         default:
             return state
     }

@@ -2,11 +2,14 @@ import styled from "styled-components"
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
 import Announcement  from '../components/Announcement'
+import { Add, Delete, Remove } from "@material-ui/icons";
 import { mobile } from "../responsive";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../_actions/cart.actions";
 import { userActions } from "../_actions/user.actions";
+import { Badge, IconButton, Menu } from '@material-ui/core';
+import { CartDetails } from "../components/CartDetails";
 
 //import img from '../image/0000015.jpg'
 
@@ -64,16 +67,16 @@ const Product = styled.div`
 `;
 
 const ProductDetail = styled.div`
-    flex: 2;
+    flex: 3;
     display: flex;
 `;
 
 const Image = styled.img`
-    width: 50%;
+    width: 40%;
 `;
 
 const Details = styled.div`
-    padding:20px;
+    padding:10px;
     diplay: flex;
     flex-direction: column;
     justify-content:space-around;
@@ -101,9 +104,10 @@ const ProductSize = styled.span``;
 const PriceDetail = styled.div`
     flex: 1;
     display:flex;
+    padding:10px;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
 `;
 
 const ProductAmountContainer = styled.div`
@@ -162,18 +166,20 @@ const Button = styled.button`
     cursor:${props => props.disable == 0 ? "not-allowed": "pointer"};
 `;
 
+
 const ProdSpan = styled.span`
     padding-left:5px;
 `;
+
 
 const Cart = () => {
     const cartItems = useSelector(state => state.carts)
     const loggedIn = useSelector(state => state.authentication.loggedIn)
     const dispatch = useDispatch();
     const [cartResponse,setCartResponse] = useState({})
+    const [quantity,setQuantity,quantityRef] = useState(1)
 
     useEffect(() => {
-        console.log("cart actions")
         if(loggedIn){
             dispatch(cartActions.getCartItems())
         }else{
@@ -190,6 +196,10 @@ const Cart = () => {
         dispatch(cartActions.createOrder())
     }
 
+    
+
+
+
   return (
     <Container>
         <Announcement />
@@ -202,31 +212,17 @@ const Cart = () => {
                 </Top>
                 <Bottom>
                     <Info>
-                      
                       {
                           cartItems.items && cartItems.items.map((item) => (
                               <div>
-                                  
-                              <Product>
-                                  <ProductDetail key={item.id}>
-                                      <Image src={`/image/${item.imageId}` }/>
-                                      <Details>
-                                          <ProductName><b>Product:</b> <ProdSpan> {item.productName}</ProdSpan> </ProductName>
-                                          <ProductName><b>Quantity:</b><ProdSpan> {item.quantity}</ProdSpan> </ProductName>
-                                          <ProductName><b>Total Price:</b><ProdSpan> {(Math.round((item.totalPrice*100)/100)).toFixed(2)} </ProdSpan></ProductName>
-                                      </Details>
-                                  </ProductDetail>
-                                  <PriceDetail>
-                                  </PriceDetail>
-                              </Product>
+                                 <CartDetails item={item} key={item.id}/> 
+                             
                               <Hr/>
                               </div>
                           ))
                       }
-                       
                     </Info>
                     <Summary>
-                        
                         <SummaryTitle>ORDER SUMMARY</SummaryTitle>
                         <SummaryItem>
                             <SummaryItemText>Subtotal</SummaryItemText>

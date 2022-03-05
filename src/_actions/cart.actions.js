@@ -6,7 +6,10 @@ import {history } from '../_helpers'
 export const cartActions = {
     addToCart,
     getCartItems,
-    createOrder
+    createOrder,
+    getCartItemsCount,
+    updateCart,
+    removeCartItem
 }
 
 function addToCart(cartRequest){
@@ -16,9 +19,9 @@ function addToCart(cartRequest){
         cartService.addToCart(cartRequest)
             .then(data => {return data.json()})
             .then(response => {
-                console.log("AddToCart response",response)
                 if(response.statusCode == 200){
                     dispatch(success(response.data))
+                    dispatch(cartActions.getCartItemsCount())
                     dispatch(alertActions.success("Item successfully added to cart"))
                 }else{
                     dispatch(alertActions.failure("Item could not be added to cart"))
@@ -35,6 +38,58 @@ function addToCart(cartRequest){
     function failure(cartRequest) {return {type: cartConstants.ADDTOCART_FAILURE,cartRequest}}
 }
 
+function updateCart(cartUpdateRequest){
+    return dispatch => {
+        dispatch(request(cartUpdateRequest))
+
+        cartService.updateCart(cartUpdateRequest)
+            .then(data => {return data.json()})
+            .then(response => {
+                if(response.statusCode == 200){
+                    dispatch(success(response.data))
+                    dispatch(cartActions.getCartItemsCount())
+                    dispatch(alertActions.success("Cart updated successfully"))
+                }else{
+                    dispatch(alertActions.failure("Cart could not be updated"))
+                }
+            },
+            error => {
+                dispatch(failure(error.toString()))
+                dispatch(alertActions.error(error.message))
+            }
+            )
+    }
+    function request(cartUpdateRequest) {return {type: cartConstants.UPDATECART_REQUEST,cartUpdateRequest}}
+    function success(cartUpdateRequest){return {type: cartConstants.UPDATECART_SUCCESS,cartUpdateRequest}}
+    function failure(cartUpdateRequest) {return {type: cartConstants.UPDATECART_FAILURE,cartUpdateRequest}}
+}
+
+function removeCartItem(productId){
+    return dispatch => {
+        dispatch(request(productId))
+
+        cartService.updateCart(productId)
+            .then(data => {return data.json()})
+            .then(response => {
+                if(response.statusCode == 200){
+                    dispatch(success(response.data))
+                    dispatch(cartActions.getCartItemsCount())
+                    dispatch(alertActions.success("Cart updated successfully"))
+                }else{
+                    dispatch(alertActions.failure("Cart could not be updated"))
+                }
+            },
+            error => {
+                dispatch(failure(error.toString()))
+                dispatch(alertActions.error(error.message))
+            }
+            )
+    }
+    function request(productId) {return {type: cartConstants.REMOVECARTITEM_REQUEST,productId}}
+    function success(productId){return {type: cartConstants.REMOVECARTITEM_SUCCESS,productId}}
+    function failure(productId) {return {type: cartConstants.REMOVECARTITEM_FAILURE,productId}}
+}
+
 function createOrder(){
     
     return dispatch => {
@@ -42,10 +97,14 @@ function createOrder(){
 
         cartService.createOrder()
             .then(response => {
-                console.log("Dispatch CREATE ORDER ",response.data)
                 dispatch(success(response.data))
+                dispatch(alertActions.success('Order created successfully'))
                 history.push('./checkout')
-
+                setTimeout(() => {
+                    window.location.reload()
+                },500)
+                
+                
             },
             error => {
                 dispatch(failure(error.toString()))
@@ -82,4 +141,28 @@ function getCartItems(){
     function request() {return {type: cartConstants.GETCARTITEMS_REQUEST}}
     function success(data){return {type: cartConstants.GETCARTITEMS_SUCCESS,data}}
     function failure() {return {type: cartConstants.GETCARTITEMS_FAILURE}}
+}
+
+function getCartItemsCount(){
+    return dispatch => {
+        dispatch(request())
+
+        cartService.getCartItemsCount()
+            .then(data =>{
+                return data.json()
+            })
+            .then(response => {
+                console.log("CartItemsCount response dispatch",response)
+                dispatch(success(response.data))
+            },
+            error => {
+                dispatch(failure(error.toString()))
+                dispatch(alertActions.error(error.message))
+            }
+            )
+    }
+
+    function request() {return {type: cartConstants.GETCARTITEMSCOUNT_REQUEST}}
+    function success(data){return {type: cartConstants.GETCARTITEMSCOUNT_SUCCESS,data}}
+    function failure() {return {type: cartConstants.GETCARTITEMSCOUNT_FAILURE}}
 }

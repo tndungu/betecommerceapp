@@ -5,7 +5,10 @@ import { authHeader,handleResponse } from '../_helpers'
 export const cartService = {
     addToCart,
     getCartItems,
-    createOrder
+    createOrder,
+    getCartItemsCount,
+    updateCart,
+    removeCartItem
 }
 
 function addToCart(CartRequest){
@@ -17,6 +20,25 @@ function addToCart(CartRequest){
     return fetch(`${config.apiUrl}/Cart/AddToCart`,requestOptions).then(handleResponse)
 }
 
+function updateCart(CartRequest){
+    const requestOptions = {
+        method:'POST',
+        headers:{'Content-Type':'application/json',...authHeader()}, 
+        body: JSON.stringify(CartRequest)
+    }
+    return fetch(`${config.apiUrl}/Cart/UpdateCart`,requestOptions).then(handleResponse)
+}
+
+function removeCartItem(productId){
+    const requestOptions = {
+        method:'POST',
+        headers:{'Content-Type':'application/json',...authHeader()}, 
+        body: JSON.stringify(productId)
+    }
+    return fetch(`${config.apiUrl}/Cart/RemoveFromCart`,requestOptions).then(handleResponse)
+}
+
+
 function getCartItems(){
     const requestOptions = {
         method:'GET',
@@ -24,6 +46,15 @@ function getCartItems(){
     }
     console.log("cart Headers",requestOptions)
     return fetch(`${config.apiUrl}/Cart/GetCartItems`,requestOptions).then(handleResponse)
+}
+
+function getCartItemsCount(){
+    const requestOptions = {
+        method:'GET',
+        headers: {'Content-Type':'application/json',...authHeader()}, 
+    }
+    console.log("cart Headers",requestOptions)
+    return fetch(`${config.apiUrl}/Cart/GetCartItemsCount`,requestOptions).then(handleResponse)
 }
 
 function createOrder(){

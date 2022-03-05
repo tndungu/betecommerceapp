@@ -1,5 +1,5 @@
 import {config} from '../api/config'
-import {handleResponse } from '../_helpers'
+import {handleResponse, history } from '../_helpers'
 
 export const userService = {
     login,
@@ -20,7 +20,7 @@ function login(user){
 }
 
 function logout(){
-    //remove user from local storage to log user out
+
     localStorage.removeItem('user')
     window.location.href = '/login'
 }

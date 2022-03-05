@@ -68,16 +68,28 @@ font-size:14px;
 margin-left:25px;
 ${mobile({fontSize:"12px", marginLeft:"10px"})}
 `;
-const Navbar = () => {
 
-    const email = useSelector(state => state.authentication.user.email)
+const Hr = styled.hr`
+    background-color: #eee;
+    border: none;
+    height: 1px;
+`;
+
+const Navbar = () => {
+    const email = useSelector(state => state.authentication.user?.email)
     const dispatch = useDispatch()
-    const cartItemsCount = useSelector(state => state.addCart.cartItems)
+    const cartItemsCount = useSelector(state => state.cartitemscount.cartItems)
     var navigate = useNavigate()
-    // useEffect(() =>{
-    //     dispatch(cartActions.getCartItemsCount(userid))
-      
-    // },[])
+
+    const goToCart = () => {
+        if(cartItemsCount > 0){
+            navigate('/cart')
+        }
+    }
+    
+    useEffect(() =>{
+        dispatch(cartActions.getCartItemsCount())
+    },[])
     
   return (
     <Container>
@@ -94,7 +106,7 @@ const Navbar = () => {
                   <MenuItem>Welcome: <b>{email}</b></MenuItem>
                   <Link href="../login"><b>Sign Out</b></Link>
                   <MenuItem>
-                      <IconButton onClick={() => {navigate('/cart')}}>
+                      <IconButton onClick={goToCart}>
                           <Badge badgeContent={cartItemsCount} color="primary">
                               <ShoppingCartOutlined />
                           </Badge>
@@ -102,6 +114,7 @@ const Navbar = () => {
                   </MenuItem>
               </Right>
         </Wrapper>
+        <Hr/>
     </Container>
   )
 }
