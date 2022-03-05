@@ -220,7 +220,6 @@ margin: 0px 5px;
 `;
 
 item = item.item
-console.log("ïtem is",item)
 const cartItems = useSelector(state => state.carts)
     const loggedIn = useSelector(state => state.authentication.loggedIn)
     const dispatch = useDispatch();
@@ -239,7 +238,8 @@ const cartItems = useSelector(state => state.carts)
     
       const UpdateCart = () => {
         if (loggedIn){
-          dispatch(cartActions.updateCart({ProductId:item.productId,quantity:quantityRef.current}))
+            console.log("quantity",quantity)
+          dispatch(cartActions.updateCart({ProductId:item.productId,Quantity:quantity}))
         }
         else {
           dispatch(userActions.logout())
@@ -247,7 +247,7 @@ const cartItems = useSelector(state => state.carts)
       }
       const RemoveFromCart = () => {
         if (loggedIn){
-          dispatch(cartActions.removeCartItem({ProductId:item.productId}))
+          dispatch(cartActions.removeCartItem(item.productId))
         }
         else {
           dispatch(userActions.logout())

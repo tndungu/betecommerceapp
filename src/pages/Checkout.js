@@ -53,6 +53,11 @@ const SummaryItem = styled.div`
     margin: 30px 0px;
     display: flex;
     justify-content: space-between;
+    
+`;
+
+const SummaryText = styled.span`
+    color:#ee4507;
 `;
 
 
@@ -70,7 +75,7 @@ const Checkout = () => {
                 <Bottom>
                     <Summary>
                     <SummaryItem>
-                            <span><b>Your order has been placed and a summary of the order details have been sent via email. Thank you for using our services.</b></span>
+                            <SummaryText><b>Your order has been placed and a summary of the order details have been sent via email. Thank you for using our services.</b></SummaryText>
                         </SummaryItem>
                     </Summary>
                     <Info>

@@ -48,6 +48,7 @@ function updateCart(cartUpdateRequest){
                 if(response.statusCode == 200){
                     dispatch(success(response.data))
                     dispatch(cartActions.getCartItemsCount())
+                    dispatch(cartActions.getCartItems())
                     dispatch(alertActions.success("Cart updated successfully"))
                 }else{
                     dispatch(alertActions.failure("Cart could not be updated"))
@@ -68,13 +69,14 @@ function removeCartItem(productId){
     return dispatch => {
         dispatch(request(productId))
 
-        cartService.updateCart(productId)
+        cartService.removeCartItem(productId)
             .then(data => {return data.json()})
             .then(response => {
                 if(response.statusCode == 200){
                     dispatch(success(response.data))
                     dispatch(cartActions.getCartItemsCount())
-                    dispatch(alertActions.success("Cart updated successfully"))
+                    dispatch(cartActions.getCartItems())
+                    dispatch(alertActions.success("Item deleted from cart."))
                 }else{
                     dispatch(alertActions.failure("Cart could not be updated"))
                 }

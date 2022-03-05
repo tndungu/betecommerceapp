@@ -1,8 +1,7 @@
 import {useEffect,useState } from 'react'
 import { useDispatch,useSelector } from 'react-redux';
-import { productActions,userActions } from '../_actions';
+import { productActions } from '../_actions';
 import styled from 'styled-components'
-import { popularProducts } from '../data'
 import { Product } from './Product';
 
 const Container = styled.div`
