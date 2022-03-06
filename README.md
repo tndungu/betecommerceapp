@@ -1,10 +1,11 @@
 # Bet Ecommerce App
 
-A complete Ecommerce Application build using React. The backend is built using .NET Core 6.0 Framework and MS SQL Server. The Backend with setup instructions is available at the [Backend API Repository](https://github.com/tndungu/BetEcommerceApi.git)
+A complete Ecommerce Application build using React. The backend is built using .NET Core 6.0 Framework and MS SQL Server. The Backend with setup instructions is available at the [Backend API Repository](https://github.com/tndungu/BetEcommerceApi.git). Performance improvement has been done using infinite scroll which ensures fast display of records where there are large datasets.
 
 ## Tools
 
-This project is primarily built in React 17.0 and REDUX for State Management. Other dependencies include 
+This project is primarily built in React 17.0 and REDUX for State Management. Others include 
+- React Hooks
 - Bootstrap 5
 - React-router-dom
 - Formik
