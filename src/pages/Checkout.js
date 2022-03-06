@@ -60,7 +60,6 @@ const SummaryText = styled.span`
     color:#ee4507;
 `;
 
-
 const Checkout = () => {
   
   return (
