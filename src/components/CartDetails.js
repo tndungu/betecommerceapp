@@ -1,15 +1,9 @@
 import styled from "styled-components"
-import Footer from "../components/Footer"
-import Navbar from "../components/Navbar"
-import Announcement  from '../components/Announcement'
-import { Add, Delete, Remove } from "@material-ui/icons";
-import { mobile } from "../responsive";
-import { useEffect, useState } from "react";
+import { Add, Remove } from "@material-ui/icons";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../_actions/cart.actions";
 import { userActions } from "../_actions/user.actions";
-import { Badge, IconButton, Menu } from '@material-ui/core';
-
 
 export const CartDetails = (item) => {
     
@@ -131,26 +125,26 @@ item = item.item
       }
 
   return (
-    <Product>
-    <ProductDetail key={item.id}>
-        <Image src={`/image/${item.imageId}` }/>
-        <Details>
-            <ProductName><b>Product:</b> <ProdSpan> {item.productName}</ProdSpan> </ProductName>
-            <ProductName><b>Total Price:</b><ProdSpan> {(Math.round((item.totalPrice*100)/100)).toFixed(2)} </ProdSpan></ProductName>
-        </Details>
-        <Details>
-        <ProductName><b>Quantity:</b> </ProductName>
-                    <AmountContainer>
-                        <Remove onClick={() => SetQuantity('decrement')} />
-                        <Amount>{quantity}</Amount>
-                        <Add onClick={() => SetQuantity('increment')} />
-                    </AmountContainer>
-                    <CartButton onClick={UpdateCart}>UPDATE CART</CartButton>
-        </Details>
-    </ProductDetail>
-    <PriceDetail>
-    <RemoveButton onClick={RemoveFromCart}>Remove from Cart</RemoveButton>
-    </PriceDetail>
-</Product>
+      <Product>
+          <ProductDetail key={item.id}>
+              <Image src={`/image/${item.imageId}`} />
+              <Details>
+                  <ProductName><b>Product:</b> <ProdSpan> {item.productName}</ProdSpan> </ProductName>
+                  <ProductName><b>Total Price:</b><ProdSpan> {(Math.round((item.totalPrice * 100) / 100)).toFixed(2)} </ProdSpan></ProductName>
+              </Details>
+              <Details>
+                  <ProductName><b>Quantity:</b> </ProductName>
+                  <AmountContainer>
+                      <Remove onClick={() => SetQuantity('decrement')} />
+                      <Amount>{quantity}</Amount>
+                      <Add onClick={() => SetQuantity('increment')} />
+                  </AmountContainer>
+                  <CartButton onClick={UpdateCart}>UPDATE CART</CartButton>
+              </Details>
+          </ProductDetail>
+          <PriceDetail>
+              <RemoveButton onClick={RemoveFromCart}>Remove from Cart</RemoveButton>
+          </PriceDetail>
+      </Product>
   )
 }

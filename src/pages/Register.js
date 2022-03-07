@@ -15,7 +15,6 @@ export const Register = () => {
         confirmPassword:''
     })
 
-
     useEffect(() => {
     },[])
 

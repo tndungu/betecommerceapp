@@ -38,7 +38,6 @@ function removeCartItem(productId){
     return fetch(`${config.apiUrl}/Cart/RemoveFromCart`,requestOptions).then(handleResponse)
 }
 
-
 function getCartItems(){
     const requestOptions = {
         method:'GET',

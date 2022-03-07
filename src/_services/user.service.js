@@ -1,5 +1,5 @@
 import {config} from '../api/config'
-import {handleResponse, history } from '../_helpers'
+import {handleResponse } from '../_helpers'
 
 export const userService = {
     login,
@@ -13,10 +13,8 @@ function login(user){
         headers:{'Content-Type': 'application/json'},
         body: JSON.stringify(user)
     }
-
     return fetch(`${config.apiUrl}/user/authenticate`,requestOptions)
         .then(handleResponse)
-        
 }
 
 function logout(){
@@ -32,6 +30,5 @@ function register(user){
         headers: {'Content-Type':'application/json'},
         body: JSON.stringify(user)
     }
-
     return fetch(`${config.apiUrl}/user/register`,requestOptions).then(handleResponse)
 }
