@@ -44,7 +44,6 @@ function getCartItems(){
         method:'GET',
         headers: {'Content-Type':'application/json',...authHeader()}, 
     }
-    console.log("cart Headers",requestOptions)
     return fetch(`${config.apiUrl}/Cart/GetCartItems`,requestOptions).then(handleResponse)
 }
 
@@ -53,7 +52,6 @@ function getCartItemsCount(){
         method:'GET',
         headers: {'Content-Type':'application/json',...authHeader()}, 
     }
-    console.log("cart Headers",requestOptions)
     return fetch(`${config.apiUrl}/Cart/GetCartItemsCount`,requestOptions).then(handleResponse)
 }
 

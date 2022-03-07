@@ -34,7 +34,6 @@ function login(user, from){
                 
             },
             error => {
-                console.log("Error occurred!!",error)
                 dispatch(failure(error.toString()))
                 dispatch(alertActions.error(error.toString()))
             }

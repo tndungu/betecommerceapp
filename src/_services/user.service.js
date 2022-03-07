@@ -27,7 +27,6 @@ function logout(){
 
 function register(user){
 
-    console.log("registering user",user)
     const requestOptions = {
         method: 'POST',
         headers: {'Content-Type':'application/json'},

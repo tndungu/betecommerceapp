@@ -130,7 +130,6 @@ function getCartItems(){
                 return data.json()
             })
             .then(response => {
-                console.log("Dispatch response.data ",response.data)
                 dispatch(success(response.data))
             },
             error => {
@@ -154,7 +153,6 @@ function getCartItemsCount(){
                 return data.json()
             })
             .then(response => {
-                console.log("CartItemsCount response dispatch",response)
                 dispatch(success(response.data))
             },
             error => {

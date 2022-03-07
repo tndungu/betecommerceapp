@@ -238,7 +238,6 @@ const cartItems = useSelector(state => state.carts)
     
       const UpdateCart = () => {
         if (loggedIn){
-            console.log("quantity",quantity)
           dispatch(cartActions.updateCart({ProductId:item.productId,Quantity:quantity}))
         }
         else {

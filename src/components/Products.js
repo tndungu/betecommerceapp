@@ -39,13 +39,10 @@ const Products = () => {
 
   useEffect(() => {
       dispatch(productActions.getAllProducts({Pointer: Pointer,Count:itemCount}))
-      //setPointerParams(prevState => {return {...prevState,Pointer:Pointer}})
   },[])
 
   const fetchMoreData = () => {
-    //setPointerParams(prevState => {return {...prevState,Pointer:Pointer}})
     dispatch(productActions.getAllProducts({Pointer: Pointer,Count:itemCount}))
-    console.log("PointerParams IS",{Pointer: Pointer,Count:itemCount})
   }
   return (
     <div id="scrollableDiv" style={{ height: 500, overflow: "auto" }}>

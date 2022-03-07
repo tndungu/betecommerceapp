@@ -35,7 +35,6 @@ export function addCart(state={},action){
 }
 
 export function cartitemscount(state={cartItems:0},action){
-    console.log("cartItemsCount",action)
     switch(action.type){
         case cartConstants.GETCARTITEMSCOUNT_REQUEST:
             return {

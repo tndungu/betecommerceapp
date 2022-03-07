@@ -16,7 +16,6 @@ function getAllProducts(PointerParams){
             .then(
                 products => {
                     if(products.statusCode == 200){
-                        console.log(products.data)
                         dispatch(success(products.data))
                     }else{
                         dispatch(failure(products.message))

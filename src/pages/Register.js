@@ -17,7 +17,6 @@ export const Register = () => {
 
 
     useEffect(() => {
-        console.log("register alert",alert)
     },[])
 
     const [submitted, setSubmitted] = useState(false)

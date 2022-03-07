@@ -9,7 +9,6 @@ export function products(state={products:[],nextPointer:1},action){
                 
             };
         case productConstants.GETALLPRODUCTS_SUCCESS:
-            console.log("product Action is",action)
                 return {
                     ...state,
                     products: [

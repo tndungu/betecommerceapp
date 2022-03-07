@@ -70,6 +70,8 @@ const Button = styled.button`
     }
 `;
 
+
+
 export const Product = (item) => {
 
   const prod = item.item
@@ -86,6 +88,7 @@ export const Product = (item) => {
       }
     }
   }
+  
 
   const AddToCart = () => {
     if (loggedIn){

@@ -12,7 +12,6 @@ const Login = () => {
         password:''
     })
     const [submitted, setSubmitted] = useState(false)
-    //const loggingIn = useSelector(state => state.authentication.loggingIn)
     const dispatch = useDispatch()
     const location = useLocation()
 

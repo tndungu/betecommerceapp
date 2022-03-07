@@ -11,7 +11,6 @@ function getAllProducts(PointerParams){
         headers:{'Content-Type':'application/json',...authHeader()}, 
         body: JSON.stringify(PointerParams)
     }
-    console.log("PRODUCTS TOKEN",requestOptions)
     return fetch(`${config.apiUrl}/Product/GetProducts`,requestOptions).then(handleResponse)
 }
 

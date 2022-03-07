@@ -2,18 +2,12 @@ import styled from "styled-components"
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
 import Announcement  from '../components/Announcement'
-import { Add, Delete, Remove } from "@material-ui/icons";
 import { mobile } from "../responsive";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../_actions/cart.actions";
 import { userActions } from "../_actions/user.actions";
-import { Badge, IconButton, Menu } from '@material-ui/core';
 import { CartDetails } from "../components/CartDetails";
-
-//import img from '../image/0000015.jpg'
-
-const Container = styled.div``;
 
 const Wrapper = styled.div`
     padding:20px;
@@ -39,16 +33,6 @@ const Top = styled.div`
     cursor: pointer;
 `; 
 
-
-const TopTexts = styled.div`
-${mobile({diplay:"none"})}
-`;
-const TopText = styled.span`
-    text-decoration: underline;
-    cursor: pointer;
-    margin: 0px 10px;
-`;
-
 const Bottom = styled.div`
     display:flex;
     justify-content: space-between;
@@ -57,75 +41,6 @@ const Bottom = styled.div`
 
 const Info = styled.div`
     flex:3
-`;
-
-const Product = styled.div`
-    display: flex;
-    justify-content: space-between;
-    height:30vh;
-    visibility: ${props => props.show == true && "hidden"};
-`;
-
-const ProductDetail = styled.div`
-    flex: 3;
-    display: flex;
-`;
-
-const Image = styled.img`
-    width: 40%;
-`;
-
-const Details = styled.div`
-    padding:10px;
-    diplay: flex;
-    flex-direction: column;
-    justify-content:space-around;
-`;
-
-const ProductName = styled.span`
-    display:flex;
-    flex:wrap;
-    font-weight:500;
-    padding:5px;
-    
-`;
-
-const ProductId = styled.span``;
-
-const ProductColor = styled.div`
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: ${props => props.color};
-`;
-
-const ProductSize = styled.span``;
-
-const PriceDetail = styled.div`
-    flex: 1;
-    display:flex;
-    padding:10px;
-    flex-direction: column;
-    align-items: center;
-    justify-content: start;
-`;
-
-const ProductAmountContainer = styled.div`
-    display: flex;
-    align-items: center;
-    margin-bottom:20px;
-`;
-
-const ProductAmount = styled.div`
-    font-size: 24px;
-    margin:5px;
-    ${mobile({margin:"5px 15px"})}
-`;
-
-const ProductPrice = styled.div`
-    font-size: 30px;
-    font-weight: 200;
-    ${mobile({marginBottom:"20px"})}
 `;
 
 const Hr = styled.hr`
@@ -166,12 +81,6 @@ const Button = styled.button`
     cursor:${props => props.disable == 0 ? "not-allowed": "pointer"};
 `;
 
-
-const ProdSpan = styled.span`
-    padding-left:5px;
-`;
-
-
 const Cart = () => {
     const cartItems = useSelector(state => state.carts)
     const loggedIn = useSelector(state => state.authentication.loggedIn)
@@ -201,7 +110,7 @@ const Cart = () => {
 
 
   return (
-    <Container>
+    <div>
         <Announcement />
         <Navbar/>
             <Wrapper>
@@ -241,7 +150,7 @@ const Cart = () => {
                 </Bottom>
             </Wrapper>
         <Footer/>
-    </Container>
+    </div>
   ) 
 }
 
