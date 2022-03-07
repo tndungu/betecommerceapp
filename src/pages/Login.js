@@ -46,14 +46,14 @@ const Login = () => {
                 {({errors, touched, isSubmitting}) =>(
                       <Form className="form-input">
                           <Field name="email" type="text" placeholder="Email" className={'form-text form-control' + (errors.email && touched.email ? ' is-invalid' : '')} />
-                          <ErrorMessage className="red" name="email" component="div" className="invalid-feedback" />
+                          <ErrorMessage name="email" component="div" className="invalid-feedback red" />
                           <Field name="password" placeholder="Password" type="password" className={'form-text form-control' + (errors.password && touched.password ? ' is-invalid' : '')} />
                           <ErrorMessage name="password" component="div" className="invalid-feedback" />
                           <button type="submit" disabled={isSubmitting} className="form-button">
                               {isSubmitting && <span className="spinner-border spinner-border-sm mr-1"></span>}
                               LOGIN
                           </button>
-                          <Link className="link" to="../register" className="btn btn-link">REGISTER</Link>
+                          <Link className="link btn btn-link" to="../register">REGISTER</Link>
                       </Form>
                 )}
             </Formik>

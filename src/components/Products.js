@@ -4,8 +4,6 @@ import { productActions } from '../_actions'
 import styled from 'styled-components'
 import { Product } from './Product'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import useState from 'react-usestateref'
-
 
 const Container = styled.div`
     padding:20px;
@@ -14,28 +12,11 @@ const Container = styled.div`
     justify-content: space-between;
 `;
 
-const style = {
-  padding:"20px",
-  display:"flex",
-  flexWrap: "wrap",
-  justifyContent:"space-between"
-
-}
-
 const Products = () => {
   const products = useSelector(state => state.products.products)
   let Pointer = useSelector(state => state.products.nextPointer)
-  const user = useSelector(state => state.authentication.user)
   const dispatch = useDispatch()
-
   const itemCount = 9;
-  let dataCount = Pointer-1
-
-  const [PointerParams,setPointerParams] = useState({
-    Pointer: Pointer,
-    Count: itemCount
-  })
-  const [hasMore,SethasMore] = useState(true)
 
   useEffect(() => {
       dispatch(productActions.getAllProducts({Pointer: Pointer,Count:itemCount}))

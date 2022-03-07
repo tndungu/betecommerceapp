@@ -1,7 +1,7 @@
 import React, { useEffect,useState } from 'react'
 import styled from 'styled-components'
 import {Search, ShoppingCartOutlined } from '@material-ui/icons'
-import { Badge, IconButton, Menu } from '@material-ui/core';
+import { Badge, IconButton } from '@material-ui/core';
 import {mobile } from "../responsive";
 import { useDispatch, useSelector } from 'react-redux';
 import { cartActions } from '../_actions/cart.actions';

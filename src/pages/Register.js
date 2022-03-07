@@ -51,7 +51,7 @@ export const Register = () => {
                 {({errors, touched, isSubmitting}) =>(
                       <Form className="form-input">
                           <Field name="email" type="text" placeholder="Email" className={'form-text form-control' + (errors.email && touched.email ? ' is-invalid' : '')} />
-                          <ErrorMessage className="red" name="email" component="div" className="invalid-feedback" />
+                          <ErrorMessage name="email" component="div" className="invalid-feedback red" />
                           <Field name="password" placeholder="Password" type="password" className={'form-text form-control' + (errors.password && touched.password ? ' is-invalid' : '')} />
                           <ErrorMessage name="password" component="div" className="invalid-feedback" />
                           <Field name="confirmPassword" placeholder="Confirm Password" type="password" className={'form-text form-control' + (errors.confirmPassword && touched.confirmPassword ? ' is-invalid' : '')} />
@@ -60,7 +60,7 @@ export const Register = () => {
                               {isSubmitting && <span className="spinner-border spinner-border-sm mr-1"></span>}
                               CREATE
                           </button>
-                          <Link className="link" to="../login" className="btn btn-link">LOGIN</Link>
+                          <Link className="link btn btn-link" to="../login">LOGIN</Link>
                       </Form>
                 )}
             </Formik>

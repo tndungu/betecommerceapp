@@ -6,7 +6,6 @@ import Products from '../components/Products'
 import Slider from '../components/Slider'
 import Footer from '../components/Footer'
 import {userActions } from '../_actions'
-import { accountService } from '../_services'
 
 const Home = () => {
   const dispatch = useDispatch()

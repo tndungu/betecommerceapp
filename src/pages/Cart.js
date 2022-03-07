@@ -3,7 +3,7 @@ import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
 import Announcement  from '../components/Announcement'
 import { mobile } from "../responsive";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../_actions/cart.actions";
 import { userActions } from "../_actions/user.actions";
@@ -68,10 +68,6 @@ const SummaryItem = styled.div`
     font-size: ${props => props.type === "total" && "24px"};
 `;
 
-const SummaryItemText = styled.span``;
-
-const SummaryItemPrice = styled.span``;
-
 const Button = styled.button`
     width: 100%;
     padding: 10px;
@@ -85,9 +81,7 @@ const Cart = () => {
     const cartItems = useSelector(state => state.carts)
     const loggedIn = useSelector(state => state.authentication.loggedIn)
     const dispatch = useDispatch();
-    const [cartResponse,setCartResponse] = useState({})
-    const [quantity,setQuantity,quantityRef] = useState(1)
-
+    
     useEffect(() => {
         if(loggedIn){
             dispatch(cartActions.getCartItems())
@@ -105,10 +99,6 @@ const Cart = () => {
         dispatch(cartActions.createOrder())
     }
 
-    
-
-
-
   return (
     <div>
         <Announcement />
@@ -125,7 +115,6 @@ const Cart = () => {
                           cartItems.items && cartItems.items.map((item) => (
                               <div>
                                  <CartDetails item={item} key={item.id}/> 
-                             
                               <Hr/>
                               </div>
                           ))
@@ -134,16 +123,16 @@ const Cart = () => {
                     <Summary>
                         <SummaryTitle>ORDER SUMMARY</SummaryTitle>
                         <SummaryItem>
-                            <SummaryItemText>Subtotal</SummaryItemText>
-                            <SummaryItemPrice>R {Math.round((sum*100)/100).toFixed(2)}</SummaryItemPrice>
+                            <span>Subtotal</span>
+                            <span>R {Math.round((sum*100)/100).toFixed(2)}</span>
                         </SummaryItem>
                         <SummaryItem>
-                            <SummaryItemText>Shipping Costs</SummaryItemText>
-                            <SummaryItemPrice>R 0.00</SummaryItemPrice>
+                            <span>Shipping Costs</span>
+                            <span>R 0.00</span>
                         </SummaryItem>
                         <SummaryItem type="total">
-                            <SummaryItemText>Total</SummaryItemText>
-                            <SummaryItemPrice>R {Math.round((sum*100)/100).toFixed(2)}</SummaryItemPrice>
+                            <span>Total</span>
+                            <span>R {Math.round((sum*100)/100).toFixed(2)}</span>
                         </SummaryItem>
                         <Button disable={sum} isDisabled={true} onClick={checkoutNow}>CHECKOUT NOW</Button>
                     </Summary>

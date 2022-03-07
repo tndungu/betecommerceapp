@@ -4,8 +4,6 @@ import Navbar from "../components/Navbar"
 import Announcement  from '../components/Announcement'
 import { mobile } from "../responsive";
 
-const Container = styled.div``;
-
 const Wrapper = styled.div`
     padding:20px;
     ${mobile({padding:"10px"})}
@@ -63,7 +61,7 @@ const SummaryText = styled.span`
 const Checkout = () => {
   
   return (
-    <Container>
+    <div>
         <Announcement />
         <Navbar/>
             <Wrapper>
@@ -82,7 +80,7 @@ const Checkout = () => {
                 </Bottom>
             </Wrapper>
         <Footer/>
-    </Container>
+    </div>
   ) 
 }
 

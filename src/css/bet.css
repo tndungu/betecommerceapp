@@ -46,14 +46,6 @@
     cursor: pointer;
 }
 
-
-/* const Link = styled.a`
-    margin: 5px 0px;
-    font-size: 12px;
-    text-decoration: underline;
-    cursor: pointer;
-`; */
-
 .title{
     font-size: 24px;
     font-weight: 300;
@@ -68,11 +60,6 @@
     justify-content: center;
 }
 
-/* const Form = styled.form`
-    display: flex;
-    flex-direction: column;
-`; */
-
 .form-button{
     min-width: 40%;
     border: none;
@@ -82,24 +69,6 @@
     color: white;
     cursor: pointer;
 }
-
-/* const Input = styled.input`
-    flex: 1;
-    min-width: 40%;
-    margin: 10px 0px;
-    padding: 10px;
-`;
-
-const Button = styled.button`
-    width: 40%;
-    border: none;
-    padding: 15px 20px;
-    background-color: teal;
-    color: white;
-    cursor: pointer;
-    margin-bottom: 10px;
-`; */
-
 
 .form-text{
     min-width: 40%;
