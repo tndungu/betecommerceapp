@@ -22,5 +22,5 @@ The dependencies will be included in the project after running npm install.
 
 ## See Demo
 
-[![betecommerceapp](https:img.youtube.com/vi/An950DRcNCA/0.jpg)](https:www.youtube.com/watch?v=An950DRcNCA)
+[![betecommerceapp](https://img.youtube.com/vi/An950DRcNCA/0.jpg)](https://www.youtube.com/watch?v=An950DRcNCA)
 
