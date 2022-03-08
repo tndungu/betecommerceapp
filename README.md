@@ -22,8 +22,5 @@ The dependencies will be included in the project after running npm install.
 
 ## See Demo
 
-<p align=center>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/An950DRcNCA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</p>
+[![betecommerceapp](https:img.youtube.com/vi/An950DRcNCA/0.jpg)](https:www.youtube.com/watch?v=An950DRcNCA)
 
-[Demo Ecommerce App](https://www.youtube.com/watch?v=An950DRcNCA)
